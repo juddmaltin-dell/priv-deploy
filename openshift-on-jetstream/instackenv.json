@@ -1,0 +1,58 @@
+{
+  "nodes": [
+    {
+      "pm_addr": "192.168.110.161",
+      "pm_password": "password",
+      "pm_type": "pxe_ipmitool",
+      "pm_user": "root"
+    },
+    {
+      "pm_addr": "192.168.110.162",
+      "pm_password": "password",
+      "pm_type": "pxe_ipmitool",
+      "pm_user": "root"
+    },
+    {
+      "pm_addr": "192.168.110.163",
+      "pm_password": "password",
+      "pm_type": "pxe_ipmitool",
+      "pm_user": "root"
+    },
+    {
+      "pm_addr": "192.168.110.164",
+      "pm_password": "password",
+      "pm_type": "pxe_ipmitool",
+      "pm_user": "root"
+    },
+    {
+      "pm_addr": "192.168.110.165",
+      "pm_password": "password",
+      "pm_type": "pxe_ipmitool",
+      "pm_user": "root"
+    },
+    {
+      "pm_addr": "192.168.110.166",
+      "pm_password": "password",
+      "pm_type": "pxe_ipmitool",
+      "pm_user": "root"
+    },
+    {
+      "pm_addr": "192.168.110.167",
+      "pm_password": "password",
+      "pm_type": "pxe_ipmitool",
+      "pm_user": "root"
+    },
+    {
+      "pm_addr": "192.168.110.168",
+      "pm_password": "password",
+      "pm_type": "pxe_ipmitool",
+      "pm_user": "root"
+    },
+    {
+      "pm_addr": "192.168.110.169",
+      "pm_password": "password",
+      "pm_type": "pxe_ipmitool",
+      "pm_user": "root"
+    }
+  ]
+}

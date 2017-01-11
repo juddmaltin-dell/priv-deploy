@@ -1,0 +1,71 @@
+# Copyright (c) 2016 Dell Inc. or its subsidiaries.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+resource_registry:
+    OS::TripleO::NodeUserData: ./first-boot.yaml
+    OS::TripleO::NodeExtraConfigPost: ./post-deploy.yaml
+
+parameter_defaults:
+  # To customize the domain name of the overcloud nodes, change "localdomain"
+  # in the following line to the desired domain name.
+  CloudDomain: judd.tan.oss.lab
+
+  # Set to true to enable Nova usage of Ceph for ephemeral storage.
+  # If set to false, Nova uses the storage local to the compute.
+  NovaEnableRbdBackend: true
+
+  # Set false in order to use use Ceph radosgw for object storage.
+  ControllerEnableSwiftStorage: false
+
+  # Additional hiera data for all nodes
+  # Override ceph_pools so the .rgw.buckets pool is created during deployment.
+  # Place this in ExtraConfig rather than CephStorageExtraConfig so the list
+  # of default pools is available on all nodes.
+  ExtraConfig:
+    ceph_pools: [
+      "volumes",
+      "vms",
+      "images",
+      ".rgw.buckets"
+    ]
+    # Additional entries added to /etc/ceph/ceph.conf
+    ceph::conf::args:
+      global/max_open_files:
+        value: 131072
+      client.radosgw.gateway/rgw_keystone_url:
+        value: "%{hiera('swift::proxy::authtoken::identity_uri')}"
+      client.radosgw.gateway/rgw_keystone_admin_token:
+        value: "%{hiera('keystone::admin_token')}"
+      client.radosgw.gateway/rgw_keystone_accepted_roles:
+        value: "_member_, Member, admin, swift"
+      client.radosgw.gateway/rgw_keystone_token_cache size:
+        value: 500
+      client.radosgw.gateway/rgw_keystone_revocation_interval:
+        value: 600
+      client.radosgw.gateway/rgw_keystone_make_new_tenants:
+        value: true
+      client.radosgw.gateway/rgw_s3_auth_use_keystone:
+        value: true
+      client.radosgw.gateway/rgw_init_timeout:
+        value: 1200
+
+  # Additional hiera data for storage nodes
+  CephStorageExtraConfig:
+    ceph_osd_selinux_permissive: false
+
+  # Additional hiera data for controller nodes
+  controllerExtraConfig:
+    swift::service::enabled: false
+    ceph::profile::params::enable_rgw: true
+    ceph::profile::params::rgw_frontends: "civetweb port=7480"

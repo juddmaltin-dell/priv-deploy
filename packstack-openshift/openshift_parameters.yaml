@@ -1,0 +1,18 @@
+parameters:
+  master_server_group_policies: affinity
+  ssh_key_name: default
+  server_image: rhel72
+  flavor: m1.medium
+  external_network: public
+  dns_nameserver: 8.8.4.4,8.8.8.8
+  node_count: 4
+  rhn_username: "dellcloudsol"
+  rhn_password: "password"
+  rhn_pool: '8a85f98153a7bdce0153a971ce9373f1'
+  deployment_type: openshift-enterprise
+  domain_name: "example.com"
+  master_hostname: "openshift-master"
+  node_hostname: "openshift-node"
+  ssh_user: cloud-user
+  master_docker_volume_size_gb: 25
+  node_docker_volume_size_gb: 25

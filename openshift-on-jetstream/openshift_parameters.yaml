@@ -1,0 +1,47 @@
+parameters:
+  ose_version: '3.3'
+  domain_name: "judd3example.com"
+  internal_subnet: 192.168.3.0/24
+  container_subnet: 10.3.0.0/24
+  ssh_key_name: default
+  infra_image: rhel72
+  infra_flavor: 'm1.medium'
+  infra_count: 2
+  bastion_image: rhel72
+  bastion_flavor: 'm1.medium'
+  master_image: rhel72
+  master_flavor: 'm1.xlarge'
+  node_image: rhel72
+  node_flavor: 'm1.xlarge'
+  loadbalancer_image: rhel72
+  loadbalancer_flavor: 'm1.medium'
+  external_network: public 
+  dns_nameserver: 8.8.4.4,8.8.8.8
+  node_count: 2
+  rhn_username: "dellcloudsol"
+  rhn_password: "password"
+  rhn_pool: '8a85f98153a7bdce0153a971ce9373f1'
+  extra_rhn_pools: '8a85f98153dfb4020153e15cdfc6618f'
+  deployment_type: openshift-enterprise
+  master_hostname: "openshift-master"
+  node_hostname: "openshift-node"
+  ssh_user: cloud-user
+  master_docker_volume_size_gb: 25
+  infra_docker_volume_size_gb: 25
+  node_docker_volume_size_gb: 25
+  master_count: 2
+  master_server_group_policies: affinity
+  deploy_router: True
+  deploy_registry: True
+  os_auth_url: http://192.168.190.121:5000/v2.0
+  os_username: admin
+  os_password: 'EvxZEef9nG46QKC6Qpnsk6bAh'
+  os_tenant_name: admin
+resource_registry:
+  OOShift::LoadBalancer: openshift-on-openstack/loadbalancer_neutron.yaml
+  OOShift::IPFailover: openshift-on-openstack/ipfailover_keepalived.yaml
+  OOShift::DockerVolume: openshift-on-openstack/volume_docker.yaml
+  OOShift::DockerVolumeAttachment: openshift-on-openstack/volume_attachment_docker.yaml
+  OOShift::RegistryVolume: openshift-on-openstack/registry_ephemeral.yaml
+  # use openshift SDN
+  OOShift::ContainerPort: openshift-on-openstack/sdn_openshift_sdn.yaml

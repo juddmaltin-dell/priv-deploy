@@ -1,0 +1,10 @@
+./assign_role.py 192.168.110.161 controller
+./assign_role.py 192.168.110.162 controller
+./assign_role.py 192.168.110.163 controller
+./assign_role.py 192.168.110.164 compute
+./assign_role.py 192.168.110.165 compute
+./assign_role.py 192.168.110.166 compute
+./assign_role.py 192.168.110.167 storage
+./assign_role.py 192.168.110.168 storage
+./assign_role.py 192.168.110.169 storage
+
